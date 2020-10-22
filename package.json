@@ -1,7 +1,8 @@
 {
   "name": "vue-sysinfo-tailwind",
   "productName": "DA - System Info",
-  "homepage": "https://digitalazul.com.br",
+  "homepage": "https://github.com/JorgesOS7/DA---System-Info",
+  "repository": "https://github.com/JorgesOS7/DA---System-Info",
   "author": {
     "name": "José Jorge da Paz Silva",
     "email": "jose@digitalazul.com.br"
@@ -38,6 +39,7 @@
     "electron-devtools-installer": "^3.1.0",
     "electron-icon-builder": "^1.0.2",
     "vue-cli-plugin-electron-builder": "^2.0.0-rc.4",
-    "vue-template-compiler": "^2.6.11"
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.12"
   }
 }

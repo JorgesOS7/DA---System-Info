@@ -9,6 +9,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+let splash
 app.allowRendererProcessReuse = true;
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -23,9 +24,12 @@ function createWindow() {
     height: 600,
     resizable: false,
     title: 'DA - System Info',
+    productName: 'DA - System Info',
+    brand: 'DA - System Info',
     frame: false,
     movable: true,
     resizable: false,
+    // show: false,
     icon: path.join(__static, 'icon.png'),
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
@@ -34,6 +38,16 @@ function createWindow() {
       nodeIntegrationInWorker: true
     }
   })
+  // splash = new BrowserWindow({
+  //   width: 800,
+  //   height: 600,
+  //   resizable: false,
+  //   title: 'DA - System Info',
+  //   frame: false,
+  //   resizable: false
+  // })
+  win.webContents.openDevTools()
+  // splash.webContents.openDevTools()
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -41,7 +55,9 @@ function createWindow() {
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    // win.loadURL('http://localhost:8082/')
+
+
+    // splash.loadFile(`file://${__dirname}/splash.html`)
     win.loadURL('app://./index.html')
   }
 
@@ -62,8 +78,10 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
+  app.setName('DA - System Info')
   if (win === null) {
     createWindow()
+    app.setName('DA - System Info')
   }
 })
 
