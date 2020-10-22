@@ -13,18 +13,24 @@
         </div>
       </div>
       <div class="bg-blue-500 flex">
-        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer CPU" @click="$router.push('/')">
-          CPU
+        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1 CPU" @click="$router.push('/')">
+          <div><cpu class="h-4 w-4" fill="#FFFF"/></div>
+          <div>CPU</div>
         </div>
-        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer Memory" @click="$router.push('/Mem')">
-          MEM
+        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1 Memory" @click="$router.push('/Mem')">
+          <div><ram class="h-4 w-4" fill="#FFFF"/></div>
+          <div>MEM</div>
         </div>
-        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer Graphics" @click="$router.push('/graphics')">GRAPHICS</div>
-        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer Disk" @click="$router.push('/disk')">DISK</div>
+        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1 Graphics" @click="$router.push('/graphics')">
+          <div><video-card class="h-4 w-4" fill="#FFFF"/></div>
+          <div>GRAPHICS</div>
+        </div>
+        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1 Disk" @click="$router.push('/disk')">
+          <div><hard-disk class="h-4 w-4" fill="#FFFF"/></div>
+          <div>DISK</div>
+        </div>
         <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1">
-          <div>
-            <settings class="h-4" fill="#FFFF"/>
-          </div>
+          <div><settings class="h-4 w-4" fill="#FFFF"/></div>
           <div>SETTINGS</div>
         </div>
       </div>
@@ -42,15 +48,24 @@
 </template>
 
 <script>
+import cpu from './assets/icons-menu/cpu.svg'
+import ram from './assets/icons-menu/ram.svg'
+import videoCard from './assets/icons-menu/video-card.svg'
+import hardDisk from './assets/icons-menu/hard-disk.svg'
 import settings from './assets/icons-menu/settings.svg'
 
 export default {
   name: 'App',
   components: {
+    cpu,
+    ram,
+    videoCard,
+    hardDisk,
     settings
+
   },
   mounted() {
-    document.querySelector('.CPU').classList.add('bg-blue-600');
+    document.querySelector(`.${this.$route.name}`).classList.add('bg-blue-600');
   },
   methods: {
     close() {
