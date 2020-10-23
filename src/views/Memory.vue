@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 p-2" v-if="mem !== null">
-    <div class="p-2 grid grid-cols-4 gap-2">
+    <div class="p-2 grid grid-cols-4 gap-2 select-none">
       <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
         <div class="text-md font-normal">Memória Total</div>
         <div class="text-lg font-medium">{{MbtoGb(mem.totalMemMb / 1000)}} GB</div>
@@ -20,7 +20,7 @@
     </div>
     <div class="p-2">
       <div class="text-2xl font-light">Detalhes da memoria</div>
-      <div class="grid grid-cols-2 gap-2" style="grid-template-columns: 25% 75%;">
+      <div class="grid grid-cols-2 gap-2 select-none" style="grid-template-columns: 25% 75%;">
         <div class="space-y-8">
           <div class="p-2">
             <select class="bg-white rounded shadow-xs p-1 w-full focus:outline-none" v-model="memSelected">
@@ -43,7 +43,7 @@
           </div>
           <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
             <div class="text-md font-normal">Fabricante</div>
-            <div class="text-lg font-medium">{{memSelected.manufacturer}}</div>
+            <div class="text-lg font-medium select-text">{{memSelected.manufacturer}}</div>
           </div>
           <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
             <div class="text-md font-normal">Tamanho</div>
@@ -51,7 +51,7 @@
           </div>
           <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
             <div class="text-md font-normal">Tipo</div>
-            <div class="text-lg font-medium">{{memSelected.type}}</div>
+            <div class="text-lg font-medium select-text">{{memSelected.type}}</div>
           </div>
           <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
             <div class="text-md font-normal">Voltagem</div>
