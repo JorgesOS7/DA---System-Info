@@ -4,6 +4,7 @@ import CPU from '../views/CPU.vue'
 import Memory from '../views/Memory.vue'
 import Graphics from '../views/Graphics.vue'
 import Disk from '../views/Disk.vue'
+import Settings from '../views/Settings.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/disk',
     name: 'Disk',
     component: Disk
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings
   }
 ]
 

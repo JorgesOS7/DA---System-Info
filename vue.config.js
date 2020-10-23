@@ -10,6 +10,13 @@ module.exports = {
           .end()
           .use('vue-svg-loader')
           .loader('vue-svg-loader');
+
+          config
+          .plugin('html')
+          .tap(args => {
+            args[0].title = 'DA - System Info'
+            return args
+          })
       },
     pluginOptions: {
         electronBuilder: {

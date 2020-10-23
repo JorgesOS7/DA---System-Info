@@ -29,7 +29,7 @@
           <div><hard-disk class="h-4 w-4" fill="#FFFF"/></div>
           <div class="select-none">DISK</div>
         </div>
-        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1">
+        <div class="text-white px-2 hover:bg-blue-600 cursor-pointer flex items-center space-x-1 Settings" @click="$router.push('/settings')">
           <div><settings class="h-4 w-4" fill="#FFFF"/></div>
           <div class="select-none">SETTINGS</div>
         </div>

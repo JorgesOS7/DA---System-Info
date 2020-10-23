@@ -7,8 +7,8 @@
             <div class="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
             <div class="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
         </div>
-        <div class="text-gray-800 text-xs font-light mt-2 text-center">
-            Aguarde ...
+        <div class="text-gray-800 text-xl font-normal mt-2 text-center">
+            <div class="animate-pulse">Aguarde ...</div>
         </div>
         </div>
     </div>
