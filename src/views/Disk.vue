@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1" v-if="disk.length > 0">
        <div class="grid grid-cols-2 p-2 gap-2" style="grid-template-columns: 16% 84%;"
        v-for="(item,index) in disk" :key="index">
             <div class="flex items-center p-2 shadow hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1 hover:scale-110" style="height: 8.5rem">
@@ -42,12 +42,19 @@ export default {
         disk: []
     }),
     async created() {
+        this.$bus.$emit('loader-show');
         this.$ipcRenderer.send('disk-info');
         await this.$ipcRenderer.on('disk-reply', (event,data) => {
             const {type, size, name, interfaceType} = data.diskLayout[0];
             const {type: diskType, used} = data.disk[0];
             this.disk.push({type, size, name, interfaceType, used, diskType});
         });
-    }
+    },
+    watch: {
+        'disk.length'(a) {
+            if(a > 0)
+                return this.$bus.$emit('loader-hide')
+        }
+    },
 }
 </script>

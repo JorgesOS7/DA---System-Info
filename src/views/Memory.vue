@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 p-2">
+  <div class="grid grid-cols-1 p-2" v-if="mem !== null">
     <div class="p-2 grid grid-cols-4 gap-2">
       <div class="shadow p-2  hover:bg-gray-100 transition duration-300">
         <div class="text-md font-normal">Memória Total</div>
@@ -68,11 +68,12 @@ export default {
   name: 'Mem',
   data: () => ({
     mem: null,
-    memLayout: null,
+    memLayout: [],
     memSelected: 0,
     MbtoGb: x => x.toFixed(1)
   }),
   async created() {
+    this.$bus.$emit('loader-show');
     setInterval(() => this.$ipcRenderer.send('mem-info'), 1500);
     await this.$ipcRenderer.on('mem-reply', (event,data) => this.mem = data);
 
@@ -81,7 +82,12 @@ export default {
       this.memLayout = data;
       this.memSelected = this.memLayout[0];
     })
-  
+  },
+  watch: {
+    'memLayout.length'(a) {
+      if(a > 0)
+        return setTimeout(() => this.$bus.$emit('loader-hide'), 1000)
+    }
   }
 }
 </script>

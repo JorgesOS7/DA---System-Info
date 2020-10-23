@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1" v-if="graphics.length > 0 && displays.length > 0">
         <div class="grid gap-2">
             <div class="grid grid-cols-2 p-2 gap-2" style="grid-template-columns: 16% 84%;"
             v-for="(item,index) in graphics" :key="index">
@@ -46,12 +46,18 @@ export default {
         displays: []
     }),
     async created(){
+        this.$bus.$emit('loader-show');        
         this.$ipcRenderer.send('graphics-info');
-        
         await this.$ipcRenderer.on('graphics-reply', (event,data) => {
             this.graphics = data.controllers;
             this.displays = data.displays;
         })
     },
+    watch: {
+        'graphics.length'(a) {
+            if(a > 0 && this.displays.length > 0)
+                return this.$bus.$emit('loader-hide')
+        }
+    }
 }
 </script>

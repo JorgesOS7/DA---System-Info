@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 p-2" style="grid-template-columns: 15% auto;">
+  <div class="grid grid-cols-2 p-2" style="grid-template-columns: 15% auto;" v-if="cpu !== null">
     <div class="p-2 flex items-center shadow hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1 hover:scale-110 ">
       <img :src="cpu.manufacturer === 'AMD' ? require('../assets/AMD-CPU.png') :  require('../assets/Intel-CPU.png')" width="100">
     </div>
@@ -34,16 +34,21 @@ export default {
   name: 'CPU',
   data: () => ({
     cpu: null,
-    currentSpeed: 0
+    currentSpeed: 0,
   }),
   async created() {
+    this.$bus.$emit('loader-show');
     this.$ipcRenderer.send('cpu-info');
-
-    await this.$ipcRenderer.on('cpu-reply', (event,data) => this.cpu = data);
-
+    await this.$ipcRenderer.on('cpu-reply', async (event,data) => this.cpu = await data);
     setInterval(() => this.$ipcRenderer.send('cpu-percentage'),1500);
-
-    await this.$ipcRenderer.on('cpu-percentage-reply', (event,data) => this.currentSpeed = data);
+   
+    await this.$ipcRenderer.on('cpu-percentage-reply', async (event,data) => this.currentSpeed = await data);
+  },
+  watch: {
+    cpu(a) {
+      if(a.brand)
+        return this.$bus.$emit('loader-hide')
+    }
   }
 }
 </script>

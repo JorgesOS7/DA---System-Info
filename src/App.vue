@@ -35,6 +35,7 @@
         </div>
       </div>
       <div class="bg-white p-2">
+        <loader v-if="loader === true"/>
         <keep-alive>
           <router-view />
         </keep-alive>
@@ -56,13 +57,19 @@ import settings from './assets/icons-menu/settings.svg'
 
 export default {
   name: 'App',
+  data: () => ({
+    loader: true
+  }),
   components: {
     cpu,
     ram,
     videoCard,
     hardDisk,
     settings
-
+  },
+  created() {
+    this.$bus.$on('loader-hide', () => this.loader = false)
+    this.$bus.$on('loader-show', () => this.loader = true)
   },
   mounted() {
     document.querySelector(`.${this.$route.name}`).classList.add('bg-blue-600');
