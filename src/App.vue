@@ -71,7 +71,7 @@ export default {
     this.$bus.$on('loader-show', () => this.loader = true)
   },
   mounted() {
-    document.querySelector(`.${this.$route.name}`).classList.add('bg-blue-600');
+      this.$nextTick(() => document.querySelector(`.${this.$route.name}`).classList.add('bg-blue-600'));
   },
   methods: {
     close() {

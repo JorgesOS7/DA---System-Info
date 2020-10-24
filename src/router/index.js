@@ -5,14 +5,34 @@ import Memory from '../views/Memory.vue'
 import Graphics from '../views/Graphics.vue'
 import Disk from '../views/Disk.vue'
 import Settings from '../views/Settings.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'Setup',
+    component: () => import('../views/Setup.vue'),
+    beforeEnter(to,from,next) {
+      let params;
+      params = localStorage.getItem('Params');
+      if(params !== null)
+        next('/cpu');
+      else
+        next();
+    }
+  },
+  {
+    path: '/cpu',
     name: 'CPU',
-    component: CPU
+    component: CPU,
+   beforeEnter(to,from,next) {
+      let params;
+      params = localStorage.getItem('Params');
+      if(params !== null)
+        next();
+      else
+        next('/');
+    }
   },
   {
     path: '/mem',
